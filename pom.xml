@@ -33,7 +33,7 @@
 
   <packaging>bundle</packaging>
   <name>Everit - HyperSQL ECM</name>
-  <description>Configurable ECM based component that makes it possible to instantiate and register JtdsDataSource and register it as an OSGi service based on the interfaces it implements.</description>
+  <description>Configurable ECM based component that makes it possible to instantiate and register HsqlDataSource and register it as an OSGi service based on the interfaces it implements.</description>
 
   <properties>
     <projectpath>hsqldb-ecm</projectpath>
@@ -86,7 +86,7 @@
               *
             </Import-Package>
             <Export-Package>
-              org.everit.persistence.jtds.ecm
+              org.everit.persistence.hsqldb.ecm
             </Export-Package>
             <_plugin>org.everit.osgi.ecm.bnd.ECMBndAnalyzerPlugin</_plugin>
           </instructions>
@@ -130,5 +130,4 @@
       <version>3.0.0</version>
     </dependency>
   </dependencies>
-
 </project>

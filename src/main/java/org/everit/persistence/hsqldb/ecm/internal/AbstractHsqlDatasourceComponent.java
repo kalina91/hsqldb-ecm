@@ -15,9 +15,11 @@
  */
 package org.everit.persistence.hsqldb.ecm.internal;
 
+import org.everit.osgi.ecm.annotation.attribute.PasswordAttribute;
 import org.everit.osgi.ecm.annotation.attribute.StringAttribute;
 import org.everit.osgi.ecm.annotation.attribute.StringAttributes;
 import org.everit.persistence.hsqldb.ecm.HsqlDataSourceComponentConstants;
+import org.hsqldb.jdbc.JDBCCommonDataSource;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceRegistration;
 
@@ -41,7 +43,7 @@ public abstract class AbstractHsqlDatasourceComponent {
 
   protected String user;
 
-  @StringAttribute(attributeId = HsqlDataSourceComponentConstants.ATTR_PASSWORD,
+  @PasswordAttribute(attributeId = HsqlDataSourceComponentConstants.ATTR_PASSWORD,
       priority = HsqlDataSourceAttributePriority.PASSWORD, label = "Password",
       description = "Password to use for login. When using "
           + "getConnection(String url, String user, String password) it's not required to set this "
@@ -68,4 +70,15 @@ public abstract class AbstractHsqlDatasourceComponent {
     user = username;
   }
 
+  /**
+   * Set the jDBCCommonDataSource configuration.
+   *
+   * @param jDBCCommonDataSource
+   *          to set the configuration.
+   */
+  protected void updatePropertiesAToD(final JDBCCommonDataSource jDBCCommonDataSource) {
+    jDBCCommonDataSource.setURL(url);
+    jDBCCommonDataSource.setUser(user);
+    jDBCCommonDataSource.setPassword(password);
+  }
 }

@@ -18,6 +18,7 @@ package org.everit.persistence.hsqldb.ecm.internal;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import javax.sql.CommonDataSource;
 import javax.sql.DataSource;
 
 import org.everit.osgi.ecm.annotation.Activate;
@@ -40,7 +41,7 @@ import org.hsqldb.jdbc.pool.JDBCXADataSource;
     configurationPolicy = ConfigurationPolicy.FACTORY, label = "Everit HyperSQL DataSource",
     description = "Configurable component that instantiates HsqlDataSource and registers it as an "
         + "OSGi service based on DataSource interface.")
-@ManualServices(@ManualService({ DataSource.class }))
+@ManualServices(@ManualService({ DataSource.class, CommonDataSource.class }))
 public class HsqlDataSourceComponent extends AbstractHsqlDatasourceComponent {
 
   /**
@@ -56,7 +57,7 @@ public class HsqlDataSourceComponent extends AbstractHsqlDatasourceComponent {
     Dictionary<String, Object> serviceProperties =
         new Hashtable<>(componentContext.getProperties());
     serviceRegistration = componentContext.registerService(
-        new String[] { DataSource.class.getName() },
+        new String[] { DataSource.class.getName(), CommonDataSource.class.getName() },
         jdbcDataSource, serviceProperties);
   }
 
@@ -70,9 +71,4 @@ public class HsqlDataSourceComponent extends AbstractHsqlDatasourceComponent {
     }
   }
 
-  private void updatePropertiesAToD(final JDBCDataSource jdbcDataSource) {
-    jdbcDataSource.setURL(url);
-    jdbcDataSource.setUser(user);
-    jdbcDataSource.setPassword(password);
-  }
 }
