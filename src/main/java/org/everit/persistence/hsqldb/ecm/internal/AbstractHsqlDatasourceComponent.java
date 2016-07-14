@@ -65,7 +65,7 @@ public abstract class AbstractHsqlDatasourceComponent {
       description = "User name to use for login. When using "
           + "getConnection(String url, String user, String password) it's not required to set "
           + "this property as it is passed as parameter, but you will have to set it when using "
-          + "getConnection(String url, Properties info) or JtdsDataSource.")
+          + "getConnection(String url, Properties info) or DataSource.")
   public void setUser(final String username) {
     user = username;
   }
